@@ -1,0 +1,1159 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DLVtech | Automatización & Inteligencia Artificial</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cyan: #00d4ff;
+    --cyan-dim: #00a8cc;
+    --cyan-glow: rgba(0, 212, 255, 0.4);
+    --cyan-faint: rgba(0, 212, 255, 0.08);
+    --navy: #0a0f1e;
+    --navy-mid: #0d1628;
+    --navy-light: #111d35;
+    --white: #f0f8ff;
+    --grey: #8aa4bf;
+    --grey-dim: #4a6070;
+    --card-bg: rgba(13, 22, 40, 0.9);
+    --border: rgba(0, 212, 255, 0.2);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background-color: var(--navy);
+    color: var(--white);
+    font-family: 'Rajdhani', sans-serif;
+    overflow-x: hidden;
+    cursor: default;
+  }
+
+  /* ── ANIMATED GRID BACKGROUND ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(0,212,255,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,212,255,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(0,212,255,0.06) 0%, transparent 70%);
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 40px;
+    background: rgba(10,15,30,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .nav-logo img {
+    height: 44px;
+    width: 44px;
+    object-fit: contain;
+    border-radius: 8px;
+  }
+
+  .nav-logo-text {
+    font-family: 'Orbitron', monospace;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--white);
+    letter-spacing: 2px;
+  }
+
+  .nav-logo-text span { color: var(--cyan); }
+
+  .nav-cta {
+    background: linear-gradient(135deg, var(--cyan), var(--cyan-dim));
+    color: var(--navy);
+    border: none;
+    padding: 10px 24px;
+    font-family: 'Orbitron', monospace;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s;
+    box-shadow: 0 0 20px var(--cyan-glow);
+  }
+
+  .nav-cta:hover {
+    box-shadow: 0 0 40px var(--cyan-glow);
+    transform: translateY(-1px);
+  }
+
+  /* ── SECTIONS ── */
+  section { position: relative; z-index: 1; }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 120px 24px 80px;
+    overflow: hidden;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    padding: 6px 18px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--cyan);
+    letter-spacing: 2px;
+    margin-bottom: 32px;
+    background: var(--cyan-faint);
+    animation: fadeDown 0.8s ease both;
+  }
+
+  .badge-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--cyan);
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%,100% { opacity:1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(1.4); }
+  }
+
+  .hero-logo-wrap {
+    margin-bottom: 32px;
+    animation: fadeDown 0.9s 0.1s ease both;
+  }
+
+  .hero-logo-wrap img {
+    width: 160px;
+    height: 160px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 30px rgba(0,212,255,0.5));
+    animation: float 4s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  h1 {
+    font-family: 'Orbitron', monospace;
+    font-size: clamp(2rem, 5vw, 3.4rem);
+    font-weight: 900;
+    line-height: 1.15;
+    color: var(--white);
+    max-width: 820px;
+    margin: 0 auto 20px;
+    animation: fadeUp 0.8s 0.2s ease both;
+  }
+
+  h1 .accent { color: var(--cyan); text-shadow: 0 0 30px var(--cyan-glow); }
+
+  h2.sub {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: clamp(1rem, 2.5vw, 1.35rem);
+    font-weight: 400;
+    color: var(--grey);
+    max-width: 620px;
+    margin: 0 auto 44px;
+    line-height: 1.6;
+    animation: fadeUp 0.8s 0.35s ease both;
+  }
+
+  .hero-ctas {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+    animation: fadeUp 0.8s 0.5s ease both;
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, var(--cyan), #0099bb);
+    color: var(--navy);
+    border: none;
+    padding: 16px 36px;
+    font-family: 'Orbitron', monospace;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.3s;
+    box-shadow: 0 0 30px var(--cyan-glow);
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 50px var(--cyan-glow);
+  }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--cyan);
+    border: 1px solid var(--border);
+    padding: 16px 36px;
+    font-family: 'Orbitron', monospace;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.3s;
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--cyan);
+    background: var(--cyan-faint);
+    box-shadow: 0 0 20px var(--cyan-glow);
+  }
+
+  /* Nodes animation */
+  .nodes-canvas {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .node {
+    position: absolute;
+    border-radius: 50%;
+    background: var(--cyan);
+    opacity: 0;
+    animation: nodeAppear 6s infinite;
+  }
+
+  @keyframes nodeAppear {
+    0% { opacity: 0; transform: scale(0); }
+    20% { opacity: 0.6; transform: scale(1); }
+    80% { opacity: 0.3; }
+    100% { opacity: 0; transform: scale(0.5) translateY(-40px); }
+  }
+
+  /* ── STATS ── */
+  .stats-bar {
+    background: var(--navy-mid);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 32px 24px;
+  }
+
+  .stats-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    text-align: center;
+  }
+
+  .stat-num {
+    font-family: 'Orbitron', monospace;
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--cyan);
+    display: block;
+    text-shadow: 0 0 20px var(--cyan-glow);
+  }
+
+  .stat-label {
+    font-size: 0.9rem;
+    color: var(--grey);
+    font-weight: 500;
+    letter-spacing: 1px;
+  }
+
+  /* ── PROBLEM ── */
+  #problema {
+    padding: 100px 24px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .section-eyebrow {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--cyan);
+    letter-spacing: 3px;
+    margin-bottom: 12px;
+    display: block;
+  }
+
+  .section-title {
+    font-family: 'Orbitron', monospace;
+    font-size: clamp(1.6rem, 3vw, 2.4rem);
+    font-weight: 700;
+    margin-bottom: 16px;
+    line-height: 1.2;
+  }
+
+  .section-title span { color: var(--cyan); }
+
+  .section-desc {
+    font-size: 1.05rem;
+    color: var(--grey);
+    line-height: 1.7;
+    max-width: 580px;
+    margin-bottom: 60px;
+  }
+
+  .problem-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+  }
+
+  .problem-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 32px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s;
+  }
+
+  .problem-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .problem-card:hover { transform: translateY(-4px); border-color: var(--cyan); }
+  .problem-card:hover::before { opacity: 1; }
+
+  .problem-icon {
+    font-size: 2.4rem;
+    margin-bottom: 16px;
+    display: block;
+  }
+
+  .problem-card h3 {
+    font-family: 'Orbitron', monospace;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+  }
+
+  .problem-card p {
+    font-size: 0.95rem;
+    color: var(--grey);
+    line-height: 1.6;
+  }
+
+  /* ── SOLUTION ── */
+  #solucion {
+    padding: 100px 24px;
+    background: linear-gradient(180deg, transparent, rgba(0,212,255,0.03), transparent);
+  }
+
+  .section-center { text-align: center; max-width: 700px; margin: 0 auto 64px; }
+
+  .plans-grid {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+    align-items: stretch;
+  }
+
+  .plan-card {
+    background: var(--card-bg);
+    border: 1px solid rgba(0,212,255,0.15);
+    border-radius: 12px;
+    padding: 40px 32px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .plan-card.featured {
+    border-color: var(--cyan);
+    background: linear-gradient(160deg, rgba(0,212,255,0.07), rgba(13,22,40,0.95));
+    box-shadow: 0 0 40px rgba(0,212,255,0.15), inset 0 1px 0 rgba(0,212,255,0.3);
+    transform: scale(1.02);
+  }
+
+  .plan-card:hover:not(.featured) { border-color: rgba(0,212,255,0.5); transform: translateY(-4px); }
+
+  .plan-badge {
+    position: absolute;
+    top: 16px; right: 16px;
+    background: var(--cyan);
+    color: var(--navy);
+    font-family: 'Orbitron', monospace;
+    font-size: 0.6rem;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 100px;
+    letter-spacing: 1px;
+  }
+
+  .plan-icon {
+    width: 52px; height: 52px;
+    border-radius: 12px;
+    background: var(--cyan-faint);
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    margin-bottom: 20px;
+  }
+
+  .plan-name {
+    font-family: 'Orbitron', monospace;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 8px;
+    letter-spacing: 1px;
+  }
+
+  .plan-tagline {
+    font-size: 0.95rem;
+    color: var(--cyan);
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
+
+  .plan-features {
+    list-style: none;
+    margin-bottom: 32px;
+    flex: 1;
+  }
+
+  .plan-features li {
+    font-size: 0.95rem;
+    color: var(--grey);
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .plan-features li::before {
+    content: '▸';
+    color: var(--cyan);
+    font-size: 0.8rem;
+    flex-shrink: 0;
+  }
+
+  /* ── CHATBOT SECTION ── */
+  #chatbot {
+    padding: 100px 24px;
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .wa-demo-box {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 48px 40px;
+    margin-top: 48px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .wa-demo-box::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 60% 60% at 50% 0%, rgba(37,211,102,0.06), transparent);
+    pointer-events: none;
+  }
+
+  .wa-icon {
+    width: 72px; height: 72px;
+    background: linear-gradient(135deg, #25d366, #128c7e);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    margin: 0 auto 24px;
+    box-shadow: 0 0 30px rgba(37,211,102,0.3);
+  }
+
+  .wa-demo-box h3 {
+    font-family: 'Orbitron', monospace;
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+    letter-spacing: 1px;
+  }
+
+  .wa-demo-box p {
+    color: var(--grey);
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 32px;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .btn-wa {
+    background: linear-gradient(135deg, #25d366, #128c7e);
+    color: white;
+    border: none;
+    padding: 16px 40px;
+    font-family: 'Orbitron', monospace;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    border-radius: 8px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.3s;
+    box-shadow: 0 0 30px rgba(37,211,102,0.3);
+  }
+
+  .btn-wa:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 50px rgba(37,211,102,0.4);
+  }
+
+  /* ── FORM ── */
+  #formulario {
+    padding: 100px 24px;
+    background: linear-gradient(180deg, transparent, rgba(0,212,255,0.03), transparent);
+  }
+
+  .form-wrapper {
+    max-width: 640px;
+    margin: 0 auto;
+  }
+
+  .form-box {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 52px 48px;
+    position: relative;
+    overflow: hidden;
+    margin-top: 48px;
+  }
+
+  .form-box::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+  }
+
+  .form-group {
+    margin-bottom: 20px;
+  }
+
+  label {
+    display: block;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--cyan);
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+  }
+
+  input, select {
+    width: 100%;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(0,212,255,0.2);
+    border-radius: 6px;
+    padding: 14px 16px;
+    color: var(--white);
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    outline: none;
+    transition: all 0.3s;
+    appearance: none;
+    -webkit-appearance: none;
+  }
+
+  input::placeholder { color: var(--grey-dim); }
+
+  input:focus, select:focus {
+    border-color: var(--cyan);
+    background: rgba(0,212,255,0.05);
+    box-shadow: 0 0 0 3px rgba(0,212,255,0.1);
+  }
+
+  select option { background: var(--navy-mid); color: var(--white); }
+
+  .select-wrap {
+    position: relative;
+  }
+
+  .select-wrap::after {
+    content: '▾';
+    position: absolute;
+    right: 16px; top: 50%;
+    transform: translateY(-50%);
+    color: var(--cyan);
+    pointer-events: none;
+  }
+
+  .btn-submit {
+    width: 100%;
+    background: linear-gradient(135deg, var(--cyan), #0099bb);
+    color: var(--navy);
+    border: none;
+    padding: 18px;
+    font-family: 'Orbitron', monospace;
+    font-size: 0.85rem;
+    font-weight: 900;
+    letter-spacing: 2px;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 8px;
+    transition: all 0.3s;
+    box-shadow: 0 0 30px var(--cyan-glow);
+  }
+
+  .btn-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 50px var(--cyan-glow);
+  }
+
+  .btn-submit:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  .form-note {
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--grey-dim);
+    margin-top: 16px;
+    letter-spacing: 0.5px;
+  }
+
+  .form-success {
+    display: none;
+    text-align: center;
+    padding: 32px;
+  }
+
+  .form-success .check {
+    font-size: 3rem;
+    display: block;
+    margin-bottom: 16px;
+  }
+
+  .form-success h3 {
+    font-family: 'Orbitron', monospace;
+    font-size: 1.1rem;
+    color: var(--cyan);
+    margin-bottom: 10px;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--navy-mid);
+    border-top: 1px solid var(--border);
+    padding: 48px 24px;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  .footer-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+
+  .footer-logo img {
+    height: 40px;
+    object-fit: contain;
+  }
+
+  .footer-logo-text {
+    font-family: 'Orbitron', monospace;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--white);
+    letter-spacing: 2px;
+  }
+
+  .footer-logo-text span { color: var(--cyan); }
+
+  .footer-tagline {
+    font-size: 0.95rem;
+    color: var(--grey);
+    margin-bottom: 8px;
+    font-style: italic;
+  }
+
+  .footer-email {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--cyan);
+    text-decoration: none;
+    letter-spacing: 1px;
+  }
+
+  .footer-email:hover { text-shadow: 0 0 15px var(--cyan-glow); }
+
+  .footer-divider {
+    height: 1px;
+    background: var(--border);
+    margin: 24px auto;
+    max-width: 400px;
+  }
+
+  .footer-copy {
+    font-size: 0.8rem;
+    color: var(--grey-dim);
+    letter-spacing: 1px;
+  }
+
+  /* ── WA FLOATING ── */
+  .wa-float {
+    position: fixed;
+    bottom: 28px; right: 28px;
+    z-index: 200;
+    width: 58px; height: 58px;
+    background: linear-gradient(135deg, #25d366, #128c7e);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+    text-decoration: none;
+    transition: all 0.3s;
+    animation: waFloat 3s ease-in-out infinite;
+  }
+
+  .wa-float:hover { transform: scale(1.1); box-shadow: 0 6px 30px rgba(37,211,102,0.6); }
+
+  @keyframes waFloat {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+  }
+
+  /* ── DIVIDER ── */
+  .line-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border), transparent);
+    margin: 0;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── MOBILE ── */
+  @media (max-width: 768px) {
+    nav { padding: 14px 20px; }
+    .nav-logo-text { font-size: 0.9rem; }
+    .plan-card.featured { transform: none; }
+    .form-box { padding: 32px 24px; }
+    .stats-inner { grid-template-columns: 1fr; gap: 16px; }
+    .hero-logo-wrap img { width: 120px; height: 120px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <img src="https://i.imgur.com/placeholder.png" alt="DLVtech logo" id="navLogo" onerror="this.style.display='none'">
+    <div class="nav-logo-text">DLV<span>tech</span></div>
+  </div>
+  <a href="#formulario" class="nav-cta">PRUEBA GRATIS</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="nodes-canvas" id="nodesCanvas"></div>
+
+  <div class="hero-badge">
+    <span class="badge-dot"></span>
+    AUTOMATIZACIÓN & INTELIGENCIA ARTIFICIAL
+  </div>
+
+  <div class="hero-logo-wrap">
+    <!-- DLV logo SVG inline fallback -->
+    <svg width="160" height="160" viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="80" cy="80" r="75" stroke="#00d4ff" stroke-width="1.5" stroke-dasharray="4 3" opacity="0.4"/>
+      <circle cx="80" cy="80" r="62" stroke="#00d4ff" stroke-width="1" opacity="0.2"/>
+      <!-- circuit lines -->
+      <path d="M20 80 L40 80 M120 80 L140 80 M80 20 L80 40 M80 120 L80 140" stroke="#00d4ff" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/>
+      <circle cx="20" cy="80" r="3" fill="#00d4ff" opacity="0.7"/>
+      <circle cx="140" cy="80" r="3" fill="#00d4ff" opacity="0.7"/>
+      <circle cx="80" cy="20" r="3" fill="#00d4ff" opacity="0.7"/>
+      <circle cx="80" cy="140" r="3" fill="#00d4ff" opacity="0.7"/>
+      <!-- DLV text -->
+      <text x="80" y="74" text-anchor="middle" font-family="Orbitron,monospace" font-size="36" font-weight="900" fill="white" filter="url(#glow)">DLV</text>
+      <text x="80" y="100" text-anchor="middle" font-family="Orbitron,monospace" font-size="11" font-weight="600" fill="#00d4ff" letter-spacing="5">TECH</text>
+      <!-- AI chip -->
+      <rect x="68" y="104" width="24" height="14" rx="3" fill="none" stroke="#00d4ff" stroke-width="1" opacity="0.7"/>
+      <text x="80" y="114" text-anchor="middle" font-family="Orbitron,monospace" font-size="7" fill="#00d4ff" opacity="0.9">AI</text>
+      <defs>
+        <filter id="glow">
+          <feGaussianBlur stdDeviation="2" result="blur"/>
+          <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+      </defs>
+    </svg>
+  </div>
+
+  <h1>Recupera tu tiempo.<br><span class="accent">Llena tu agenda</span> mientras trabajas.</h1>
+  <h2 class="sub">Soluciones de IA para Peluquerías, Clínicas y Fisioterapeutas locales. Disponibilidad 24/7 sin llamadas perdidas.</h2>
+
+  <div class="hero-ctas">
+    <a href="#formulario" class="btn-primary">⚡ PRUEBA GRATIS 7 DÍAS</a>
+    <a href="#chatbot" class="btn-secondary">VER DEMO IA</a>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div>
+      <span class="stat-num">24/7</span>
+      <span class="stat-label">Recepción Activa</span>
+    </div>
+    <div>
+      <span class="stat-num">+40%</span>
+      <span class="stat-label">Más Citas Confirmadas</span>
+    </div>
+    <div>
+      <span class="stat-num">0 h</span>
+      <span class="stat-label">De Gestión Manual</span>
+    </div>
+  </div>
+</div>
+
+<div class="line-divider"></div>
+
+<!-- PROBLEM -->
+<section id="problema">
+  <div class="reveal">
+    <span class="section-eyebrow">// EL PROBLEMA</span>
+    <h2 class="section-title">¿Tu negocio pierde citas<br><span>por no estar siempre disponible?</span></h2>
+    <p class="section-desc">El 60% de las citas perdidas ocurren fuera del horario laboral. Cada llamada no contestada es dinero que se va a la competencia.</p>
+  </div>
+
+  <div class="problem-grid">
+    <div class="problem-card reveal">
+      <span class="problem-icon">📵</span>
+      <h3>Llamadas Sin Contestar</h3>
+      <p>Estás con las manos ocupadas. El cliente llama, no contestas, y llama a otro. Así de simple.</p>
+    </div>
+    <div class="problem-card reveal">
+      <span class="problem-icon">📅</span>
+      <h3>Agenda en Papel Caótica</h3>
+      <p>Tachaduras, confusiones de horario, dobles reservas. Tu agenda manual te juega en contra.</p>
+    </div>
+    <div class="problem-card reveal">
+      <span class="problem-icon">💸</span>
+      <h3>Ingresos que se Escapan</h3>
+      <p>Sin confirmaciones automáticas, las ausencias destrozan tu rentabilidad día a día.</p>
+    </div>
+  </div>
+</section>
+
+<div class="line-divider"></div>
+
+<!-- SOLUTION -->
+<section id="solucion">
+  <div class="section-center reveal">
+    <span class="section-eyebrow">// LA SOLUCIÓN</span>
+    <h2 class="section-title">Nuestros <span>Paquetes IA</span></h2>
+    <p style="color: var(--grey); font-size: 1rem; line-height: 1.6;">Automatización a medida para negocios locales. Sin contratos eternos, sin complicaciones técnicas.</p>
+  </div>
+
+  <div class="plans-grid">
+    <div class="plan-card reveal">
+      <div class="plan-icon">🗓️</div>
+      <div class="plan-name">Pack Cita Ágil</div>
+      <div class="plan-tagline">Automatización de agenda básica</div>
+      <ul class="plan-features">
+        <li>Reservas automáticas desde Instagram</li>
+        <li>Confirmaciones por WhatsApp</li>
+        <li>Recordatorios 24h antes</li>
+        <li>Panel de control sencillo</li>
+      </ul>
+      <a href="#formulario" class="btn-secondary" style="text-align:center;font-size:0.72rem;">EMPEZAR AHORA</a>
+    </div>
+
+    <div class="plan-card featured reveal">
+      <div class="plan-badge">★ MÁS POPULAR</div>
+      <div class="plan-icon">🤖</div>
+      <div class="plan-name">Recepción Inteligente</div>
+      <div class="plan-tagline">Chatbot IA + Gestión de Agenda</div>
+      <ul class="plan-features">
+        <li>Todo lo del Pack Ágil</li>
+        <li>Chatbot IA 24/7 en WhatsApp</li>
+        <li>Gestión de cancelaciones y cambios</li>
+        <li>Captación de leads automática</li>
+        <li>Reportes semanales de negocio</li>
+      </ul>
+      <a href="#formulario" class="btn-primary" style="text-align:center;font-size:0.72rem;">ACTIVAR AHORA</a>
+    </div>
+
+    <div class="plan-card reveal">
+      <div class="plan-icon">🚀</div>
+      <div class="plan-name">Pack DLV 360</div>
+      <div class="plan-tagline">Automatización total del negocio</div>
+      <ul class="plan-features">
+        <li>Todo lo de Recepción Inteligente</li>
+        <li>Web profesional incluida</li>
+        <li>Captación activa de leads</li>
+        <li>CRM básico de clientes</li>
+        <li>Soporte prioritario</li>
+      </ul>
+      <a href="#formulario" class="btn-secondary" style="text-align:center;font-size:0.72rem;">SOLICITAR INFO</a>
+    </div>
+  </div>
+</section>
+
+<div class="line-divider"></div>
+
+<!-- CHATBOT -->
+<section id="chatbot">
+  <div class="reveal">
+    <span class="section-eyebrow">// DEMO EN VIVO</span>
+    <h2 class="section-title">Habla con nuestro<br><span>Asistente IA ahora</span></h2>
+  </div>
+
+  <div class="wa-demo-box reveal">
+    <div class="wa-icon">💬</div>
+    <h3>Asistente DLVtech en WhatsApp</h3>
+    <p>¿Tienes dudas sobre cómo funcionaría en tu negocio? Nuestro asistente de IA responde al instante, cualquier día, a cualquier hora.</p>
+    <a href="https://wa.me/tunumero?text=Hola,%20quiero%20m%C3%A1s%20info%20de%20DLVtech" target="_blank" class="btn-wa">
+      💬 CHATEAR CON IA AHORA
+    </a>
+    <p style="font-size:0.8rem; color: var(--grey-dim); margin-top: 20px; margin-bottom: 0;">Respuesta media: menos de 30 segundos · Disponible 24/7</p>
+  </div>
+</section>
+
+<div class="line-divider"></div>
+
+<!-- FORM -->
+<section id="formulario">
+  <div class="form-wrapper">
+    <div class="reveal" style="text-align:center; margin-bottom: 0;">
+      <span class="section-eyebrow">// PRUEBA GRATUITA</span>
+      <h2 class="section-title">Solicita tus <span>7 Días Gratis</span></h2>
+      <p style="color: var(--grey); font-size: 1rem; line-height:1.6;">Te configuramos tu sistema de citas sin coste. Sin tarjeta. Sin riesgo.</p>
+    </div>
+
+    <div class="form-box reveal">
+      <div id="formContent">
+        <div class="form-group">
+          <label>NOMBRE COMPLETO</label>
+          <input type="text" id="nombre" placeholder="Ej: María García" required>
+        </div>
+        <div class="form-group">
+          <label>NOMBRE DEL NEGOCIO</label>
+          <input type="text" id="negocio" placeholder="Ej: Peluquería Estilo" required>
+        </div>
+        <div class="form-group">
+          <label>WHATSAPP DEL NEGOCIO</label>
+          <input type="tel" id="whatsapp" placeholder="+34 612 345 678" required>
+        </div>
+        <div class="form-group">
+          <label>SECTOR</label>
+          <div class="select-wrap">
+            <select id="sector" required>
+              <option value="" disabled selected>Selecciona tu sector</option>
+              <option value="estetica">Estética / Peluquería</option>
+              <option value="fisioterapia">Fisioterapia / Salud</option>
+              <option value="otro">Otro Negocio Local</option>
+            </select>
+          </div>
+        </div>
+        <button class="btn-submit" id="submitBtn" onclick="submitForm()">
+          ⚡ ACTIVAR MI PRUEBA GRATIS
+        </button>
+        <p class="form-note">🔒 Tus datos están seguros. Solo te contactaremos para configurar tu sistema.</p>
+      </div>
+
+      <div class="form-success" id="formSuccess">
+        <span class="check">✅</span>
+        <h3>¡SOLICITUD RECIBIDA!</h3>
+        <p style="color: var(--grey); font-size: 0.95rem; line-height: 1.6;">Te contactaremos en menos de 24h para configurar tu prueba gratuita. Revisa tu WhatsApp.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">
+    <svg width="36" height="36" viewBox="0 0 160 160" fill="none">
+      <circle cx="80" cy="80" r="75" stroke="#00d4ff" stroke-width="1.5" opacity="0.4"/>
+      <text x="80" y="75" text-anchor="middle" font-family="Orbitron,monospace" font-size="36" font-weight="900" fill="white">DLV</text>
+      <text x="80" y="95" text-anchor="middle" font-family="Orbitron,monospace" font-size="11" font-weight="600" fill="#00d4ff" letter-spacing="4">TECH</text>
+    </svg>
+    <div class="footer-logo-text">DLV<span>tech</span></div>
+  </div>
+  <p class="footer-tagline">Tecnología local, de un emprendedor para otro.</p>
+  <a href="mailto:dlvtech.ia@gmail.com" class="footer-email">dlvtech.ia@gmail.com</a>
+  <div class="footer-divider"></div>
+  <p class="footer-copy">© 2026 DLVtech · Automatización & Inteligencia Artificial · Todos los derechos reservados.</p>
+</footer>
+
+<!-- WhatsApp floating button -->
+<a href="https://wa.me/tunumero?text=Hola,%20quiero%20m%C3%A1s%20info%20de%20DLVtech" target="_blank" class="wa-float" title="Chatear por WhatsApp">💬</a>
+
+<script>
+  // ── NODE PARTICLES ──
+  function createNodes() {
+    const canvas = document.getElementById('nodesCanvas');
+    for (let i = 0; i < 14; i++) {
+      const node = document.createElement('div');
+      node.classList.add('node');
+      const size = Math.random() * 6 + 3;
+      node.style.cssText = `
+        width: ${size}px;
+        height: ${size}px;
+        left: ${Math.random() * 100}%;
+        top: ${Math.random() * 100}%;
+        animation-delay: ${Math.random() * 6}s;
+        animation-duration: ${4 + Math.random() * 4}s;
+        box-shadow: 0 0 ${size * 2}px #00d4ff;
+      `;
+      canvas.appendChild(node);
+    }
+  }
+  createNodes();
+
+  // ── SCROLL REVEAL ──
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(r => observer.observe(r));
+
+  // ── FORM SUBMIT ──
+  async function submitForm() {
+    const nombre = document.getElementById('nombre').value.trim();
+    const negocio = document.getElementById('negocio').value.trim();
+    const whatsapp = document.getElementById('whatsapp').value.trim();
+    const sector = document.getElementById('sector').value;
+
+    if (!nombre || !negocio || !whatsapp || !sector) {
+      alert('Por favor, completa todos los campos.');
+      return;
+    }
+
+    const btn = document.getElementById('submitBtn');
+    btn.disabled = true;
+    btn.textContent = '⏳ ENVIANDO...';
+
+    const payload = {
+      nombre,
+      negocio,
+      whatsapp,
+      sector,
+      fuente: 'landing-dlvtech',
+      fecha: new Date().toISOString()
+    };
+
+    try {
+      await fetch('https://roman14.app.n8n.cloud/webhook/leads-dlvsolutions', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+        mode: 'no-cors'
+      });
+    } catch (e) {
+      console.log('Webhook error (non-blocking):', e);
+    }
+
+    document.getElementById('formContent').style.display = 'none';
+    document.getElementById('formSuccess').style.display = 'block';
+  }
+</script>
+</body>
+</html>
