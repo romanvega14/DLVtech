@@ -33,7 +33,6 @@
     cursor: default;
   }
 
-  /* ── ANIMATED GRID BACKGROUND ── */
   body::before {
     content: '';
     position: fixed;
@@ -55,7 +54,6 @@
     pointer-events: none;
   }
 
-  /* ── NAV ── */
   nav {
     position: fixed;
     top: 0; left: 0; right: 0;
@@ -113,10 +111,8 @@
     transform: translateY(-1px);
   }
 
-  /* ── SECTIONS ── */
   section { position: relative; z-index: 1; }
 
-  /* ── HERO ── */
   #hero {
     min-height: 100vh;
     display: flex;
@@ -250,7 +246,6 @@
     box-shadow: 0 0 20px var(--cyan-glow);
   }
 
-  /* Nodes animation */
   .nodes-canvas {
     position: absolute;
     inset: 0;
@@ -273,7 +268,6 @@
     100% { opacity: 0; transform: scale(0.5) translateY(-40px); }
   }
 
-  /* ── STATS ── */
   .stats-bar {
     background: var(--navy-mid);
     border-top: 1px solid var(--border);
@@ -306,7 +300,6 @@
     letter-spacing: 1px;
   }
 
-  /* ── PROBLEM ── */
   #problema {
     padding: 100px 24px;
     max-width: 1100px;
@@ -390,7 +383,6 @@
     line-height: 1.6;
   }
 
-  /* ── SOLUTION ── */
   #solucion {
     padding: 100px 24px;
     background: linear-gradient(180deg, transparent, rgba(0,212,255,0.03), transparent);
@@ -492,7 +484,6 @@
     flex-shrink: 0;
   }
 
-  /* ── CHATBOT SECTION ── */
   #chatbot {
     padding: 100px 24px;
     max-width: 900px;
@@ -570,7 +561,6 @@
     box-shadow: 0 0 50px rgba(37,211,102,0.4);
   }
 
-  /* ── FORM ── */
   #formulario {
     padding: 100px 24px;
     background: linear-gradient(180deg, transparent, rgba(0,212,255,0.03), transparent);
@@ -687,26 +677,6 @@
     letter-spacing: 0.5px;
   }
 
-  .form-success {
-    display: none;
-    text-align: center;
-    padding: 32px;
-  }
-
-  .form-success .check {
-    font-size: 3rem;
-    display: block;
-    margin-bottom: 16px;
-  }
-
-  .form-success h3 {
-    font-family: 'Orbitron', monospace;
-    font-size: 1.1rem;
-    color: var(--cyan);
-    margin-bottom: 10px;
-  }
-
-  /* ── FOOTER ── */
   footer {
     background: var(--navy-mid);
     border-top: 1px solid var(--border);
@@ -769,25 +739,217 @@
     letter-spacing: 1px;
   }
 
-  /* ── WA FLOATING ── */
-  .wa-float {
+  /* ── TOAST ── */
+  .toast {
+    position: fixed;
+    top: 24px; left: 50%;
+    transform: translateX(-50%) translateY(-120px);
+    z-index: 9999;
+    background: var(--navy-mid);
+    border: 1px solid var(--cyan);
+    border-radius: 8px;
+    padding: 16px 32px;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1rem;
+    color: var(--white);
+    box-shadow: 0 0 40px rgba(0,212,255,0.3), 0 4px 20px rgba(0,0,0,0.5);
+    transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    pointer-events: none;
+    white-space: nowrap;
+  }
+  .toast.show { transform: translateX(-50%) translateY(0); }
+
+  /* ── WA WIDGET ── */
+  .wa-widget {
     position: fixed;
     bottom: 28px; right: 28px;
     z-index: 200;
-    width: 58px; height: 58px;
-    background: linear-gradient(135deg, #25d366, #128c7e);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 12px;
+  }
+
+  .wa-widget-panel {
+    width: 340px;
+    max-height: 460px;
+    background: var(--navy-mid);
+    border: 1px solid rgba(37,211,102,0.3);
+    border-radius: 16px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.6), 0 0 30px rgba(37,211,102,0.15);
+    transform: scale(0.8) translateY(20px);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transform-origin: bottom right;
+  }
+  .wa-widget-panel.open {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .wa-widget-header {
+    background: linear-gradient(135deg, #128c7e, #25d366);
+    padding: 16px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .wa-widget-header-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .wa-widget-avatar {
+    width: 40px; height: 40px;
     border-radius: 50%;
+    background: rgba(255,255,255,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Orbitron', monospace;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: white;
+    letter-spacing: 1px;
+  }
+
+  .wa-widget-header-title {
+    font-family: 'Orbitron', monospace;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: white;
+    letter-spacing: 1px;
+  }
+
+  .wa-widget-header-status {
+    font-size: 0.72rem;
+    color: rgba(255,255,255,0.85);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .wa-widget-close {
+    background: none;
+    border: none;
+    color: rgba(255,255,255,0.8);
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 4px;
+    transition: background 0.2s;
+  }
+  .wa-widget-close:hover { background: rgba(255,255,255,0.15); }
+
+  .wa-widget-body {
+    flex: 1;
+    padding: 16px;
+    overflow-y: auto;
+    background: rgba(10,15,30,0.6);
+    min-height: 200px;
+  }
+
+  .wa-message {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 12px;
+  }
+
+  .wa-message-content {
+    background: rgba(37,211,102,0.12);
+    border: 1px solid rgba(37,211,102,0.2);
+    border-radius: 4px 16px 16px 16px;
+    padding: 12px 16px;
+    font-size: 0.92rem;
+    color: var(--white);
+    line-height: 1.5;
+    max-width: 90%;
+  }
+
+  .wa-message-time {
+    font-size: 0.65rem;
+    color: var(--grey-dim);
+    margin-top: 4px;
+    padding-left: 4px;
+  }
+
+  .wa-widget-footer {
+    display: flex;
+    padding: 10px 12px;
+    gap: 8px;
+    background: rgba(10,15,30,0.8);
+    border-top: 1px solid rgba(37,211,102,0.15);
+  }
+
+  .wa-widget-input {
+    flex: 1;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(37,211,102,0.2);
+    border-radius: 8px;
+    padding: 10px 14px;
+    color: var(--white);
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.92rem;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .wa-widget-input:focus { border-color: #25d366; }
+
+  .wa-widget-send {
+    width: 42px; height: 42px;
+    border-radius: 50%;
+    border: none;
+    background: linear-gradient(135deg, #25d366, #128c7e);
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .wa-widget-send:hover { transform: scale(1.1); box-shadow: 0 0 20px rgba(37,211,102,0.4); }
+
+  .wa-widget-btn {
+    width: 58px; height: 58px;
+    border-radius: 50%;
+    border: none;
+    background: linear-gradient(135deg, #25d366, #128c7e);
+    cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 1.6rem;
-    box-shadow: 0 4px 20px rgba(37,211,102,0.4);
-    text-decoration: none;
+    box-shadow: 0 4px 24px rgba(37,211,102,0.4);
     transition: all 0.3s;
+    position: relative;
+    flex-shrink: 0;
     animation: waFloat 3s ease-in-out infinite;
   }
+  .wa-widget-btn:hover {
+    transform: scale(1.08);
+    box-shadow: 0 6px 30px rgba(37,211,102,0.6);
+    animation: none;
+  }
 
-  .wa-float:hover { transform: scale(1.1); box-shadow: 0 6px 30px rgba(37,211,102,0.6); }
+  .wa-widget-btn-icon,
+  .wa-widget-btn-close {
+    transition: opacity 0.2s, transform 0.2s;
+    position: absolute;
+  }
+  .wa-widget-btn.open .wa-widget-btn-icon { opacity: 0; transform: rotate(-90deg); }
+  .wa-widget-btn.open .wa-widget-btn-close { opacity: 1; transform: rotate(0); }
+  .wa-widget-btn-icon { opacity: 1; }
+  .wa-widget-btn-close { opacity: 0; transform: rotate(90deg); }
 
   @keyframes waFloat {
     0%,100% { transform: translateY(0); }
@@ -823,7 +985,6 @@
     transform: translateY(0);
   }
 
-  /* ── MOBILE ── */
   @media (max-width: 768px) {
     nav { padding: 14px 20px; }
     .nav-logo-text { font-size: 0.9rem; }
@@ -831,6 +992,11 @@
     .form-box { padding: 32px 24px; }
     .stats-inner { grid-template-columns: 1fr; gap: 16px; }
     .hero-logo-wrap img { width: 120px; height: 120px; }
+  }
+
+  @media (max-width: 480px) {
+    .wa-widget-panel { width: calc(100vw - 40px); max-height: 420px; right: 20px; }
+    .toast { font-size: 0.85rem; padding: 12px 20px; }
   }
 </style>
 </head>
@@ -855,20 +1021,16 @@
   </div>
 
   <div class="hero-logo-wrap">
-    <!-- DLV logo SVG inline fallback -->
     <svg width="160" height="160" viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg">
       <circle cx="80" cy="80" r="75" stroke="#00d4ff" stroke-width="1.5" stroke-dasharray="4 3" opacity="0.4"/>
       <circle cx="80" cy="80" r="62" stroke="#00d4ff" stroke-width="1" opacity="0.2"/>
-      <!-- circuit lines -->
       <path d="M20 80 L40 80 M120 80 L140 80 M80 20 L80 40 M80 120 L80 140" stroke="#00d4ff" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/>
       <circle cx="20" cy="80" r="3" fill="#00d4ff" opacity="0.7"/>
       <circle cx="140" cy="80" r="3" fill="#00d4ff" opacity="0.7"/>
       <circle cx="80" cy="20" r="3" fill="#00d4ff" opacity="0.7"/>
       <circle cx="80" cy="140" r="3" fill="#00d4ff" opacity="0.7"/>
-      <!-- DLV text -->
       <text x="80" y="74" text-anchor="middle" font-family="Orbitron,monospace" font-size="36" font-weight="900" fill="white" filter="url(#glow)">DLV</text>
       <text x="80" y="100" text-anchor="middle" font-family="Orbitron,monospace" font-size="11" font-weight="600" fill="#00d4ff" letter-spacing="5">TECH</text>
-      <!-- AI chip -->
       <rect x="68" y="104" width="24" height="14" rx="3" fill="none" stroke="#00d4ff" stroke-width="1" opacity="0.7"/>
       <text x="80" y="114" text-anchor="middle" font-family="Orbitron,monospace" font-size="7" fill="#00d4ff" opacity="0.9">AI</text>
       <defs>
@@ -1004,7 +1166,7 @@
     <div class="wa-icon">💬</div>
     <h3>Asistente DLVtech en WhatsApp</h3>
     <p>¿Tienes dudas sobre cómo funcionaría en tu negocio? Nuestro asistente de IA responde al instante, cualquier día, a cualquier hora.</p>
-    <a href="https://wa.me/tunumero?text=Hola,%20quiero%20m%C3%A1s%20info%20de%20DLVtech" target="_blank" class="btn-wa">
+    <a href="https://wa.me/34664700341?text=Hola,%20quiero%20m%C3%A1s%20info%20de%20DLVtech" target="_blank" class="btn-wa">
       💬 CHATEAR CON IA AHORA
     </a>
     <p style="font-size:0.8rem; color: var(--grey-dim); margin-top: 20px; margin-bottom: 0;">Respuesta media: menos de 30 segundos · Disponible 24/7</p>
@@ -1052,12 +1214,6 @@
         </button>
         <p class="form-note">🔒 Tus datos están seguros. Solo te contactaremos para configurar tu sistema.</p>
       </div>
-
-      <div class="form-success" id="formSuccess">
-        <span class="check">✅</span>
-        <h3>¡SOLICITUD RECIBIDA!</h3>
-        <p style="color: var(--grey); font-size: 0.95rem; line-height: 1.6;">Te contactaremos en menos de 24h para configurar tu prueba gratuita. Revisa tu WhatsApp.</p>
-      </div>
     </div>
   </div>
 </section>
@@ -1078,10 +1234,48 @@
   <p class="footer-copy">© 2026 DLVtech · Automatización & Inteligencia Artificial · Todos los derechos reservados.</p>
 </footer>
 
-<!-- WhatsApp floating button -->
-<a href="https://wa.me/tunumero?text=Hola,%20quiero%20m%C3%A1s%20info%20de%20DLVtech" target="_blank" class="wa-float" title="Chatear por WhatsApp">💬</a>
+<!-- WhatsApp Widget -->
+<div class="wa-widget" id="waWidget">
+  <div class="wa-widget-panel" id="waPanel">
+    <div class="wa-widget-header">
+      <div class="wa-widget-header-info">
+        <div class="wa-widget-avatar">DLV</div>
+        <div>
+          <div class="wa-widget-header-title">DLVtech</div>
+          <div class="wa-widget-header-status">🟢 En línea</div>
+        </div>
+      </div>
+      <button class="wa-widget-close" id="waClose" aria-label="Cerrar chat">✕</button>
+    </div>
+    <div class="wa-widget-body" id="waBody">
+      <div class="wa-message">
+        <div class="wa-message-content">
+          ¡Hola! 👋 Soy el asistente de <strong>DLVtech</strong>. ¿En qué puedo ayudarte?<br><br>
+          Puedes preguntarme sobre nuestros servicios o escribir directamente tu mensaje y te responderé al instante.
+        </div>
+        <div class="wa-message-time">Ahora</div>
+      </div>
+    </div>
+    <div class="wa-widget-footer">
+      <input type="text" class="wa-widget-input" id="waInput" placeholder="Escribe un mensaje..." autocomplete="off">
+      <button class="wa-widget-send" id="waSend" aria-label="Enviar">➤</button>
+    </div>
+  </div>
+  <button class="wa-widget-btn" id="waToggle" aria-label="Abrir chat">
+    <span class="wa-widget-btn-icon">💬</span>
+    <span class="wa-widget-btn-close">✕</span>
+  </button>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<!-- EmailJS -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
 <script>
+  emailjs.init('5YNkBz-DdkmCj1M6k');
+
   // ── NODE PARTICLES ──
   function createNodes() {
     const canvas = document.getElementById('nodesCanvas');
@@ -1115,6 +1309,14 @@
   }, { threshold: 0.12 });
   reveals.forEach(r => observer.observe(r));
 
+  // ── TOAST ──
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 3000);
+  }
+
   // ── FORM SUBMIT ──
   async function submitForm() {
     const nombre = document.getElementById('nombre').value.trim();
@@ -1137,8 +1339,21 @@
       whatsapp,
       sector,
       fuente: 'landing-dlvtech',
-      fecha: new Date().toISOString()
+      fecha: new Date().toLocaleString('es-ES', { timeZone: 'Europe/Madrid' })
     };
+
+    try {
+      await emailjs.send('default_service', 'template_fkze7ou', {
+        to_email: 'dlvtech.ia@gmail.com',
+        from_name: nombre,
+        negocio: negocio,
+        whatsapp: whatsapp,
+        sector: sector,
+        message: `Nueva solicitud de prueba gratuita\n\nNombre: ${nombre}\nNegocio: ${negocio}\nWhatsApp: ${whatsapp}\nSector: ${sector}\nFecha: ${payload.fecha}`
+      });
+    } catch (e) {
+      console.warn('EmailJS error (non-blocking):', e);
+    }
 
     try {
       await fetch('https://roman14.app.n8n.cloud/webhook/leads-dlvsolutions', {
@@ -1151,9 +1366,58 @@
       console.log('Webhook error (non-blocking):', e);
     }
 
-    document.getElementById('formContent').style.display = 'none';
-    document.getElementById('formSuccess').style.display = 'block';
+    document.getElementById('nombre').value = '';
+    document.getElementById('negocio').value = '';
+    document.getElementById('whatsapp').value = '';
+    document.getElementById('sector').selectedIndex = 0;
+
+    btn.disabled = false;
+    btn.textContent = '⚡ ACTIVAR MI PRUEBA GRATIS';
+
+    showToast('✅ ¡Solicitud enviada! Te contactaremos en 24h.');
+
+    setTimeout(() => {
+      document.getElementById('hero').scrollIntoView({ behavior: 'smooth' });
+    }, 1200);
   }
+
+  // ── WHATSAPP WIDGET ──
+  const waToggle = document.getElementById('waToggle');
+  const waPanel = document.getElementById('waPanel');
+  const waClose = document.getElementById('waClose');
+  const waInput = document.getElementById('waInput');
+  const waSend = document.getElementById('waSend');
+
+  function toggleWidget(open) {
+    const isOpen = open !== undefined ? open : waPanel.classList.toggle('open');
+    if (open !== undefined) {
+      waPanel.classList.toggle('open', open);
+      waToggle.classList.toggle('open', open);
+    } else {
+      waPanel.classList.toggle('open');
+      waToggle.classList.toggle('open');
+    }
+    if (waPanel.classList.contains('open')) {
+      waInput.focus();
+    }
+  }
+
+  waToggle.addEventListener('click', () => toggleWidget());
+  waClose.addEventListener('click', () => toggleWidget(false));
+
+  function sendWaMessage() {
+    const text = waInput.value.trim();
+    if (!text) return;
+    const encoded = encodeURIComponent(text);
+    window.open(`https://wa.me/34664700341?text=${encoded}`, '_blank');
+    waInput.value = '';
+    toggleWidget(false);
+  }
+
+  waSend.addEventListener('click', sendWaMessage);
+  waInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') sendWaMessage();
+  });
 </script>
 </body>
 </html>
