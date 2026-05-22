@@ -759,201 +759,36 @@
   }
   .toast.show { transform: translateX(-50%) translateY(0); }
 
-  /* ── WA WIDGET ── */
-  .wa-widget {
+  /* ── WA FLOATING ── */
+  .wa-float {
     position: fixed;
     bottom: 28px; right: 28px;
     z-index: 200;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 12px;
-  }
-
-  .wa-widget-panel {
-    width: 340px;
-    max-height: 460px;
-    background: var(--navy-mid);
-    border: 1px solid rgba(37,211,102,0.3);
-    border-radius: 16px;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    box-shadow: 0 8px 40px rgba(0,0,0,0.6), 0 0 30px rgba(37,211,102,0.15);
-    transform: scale(0.8) translateY(20px);
-    opacity: 0;
-    pointer-events: none;
-    transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
-    transform-origin: bottom right;
-  }
-  .wa-widget-panel.open {
-    transform: scale(1) translateY(0);
-    opacity: 1;
-    pointer-events: auto;
-  }
-
-  .wa-widget-header {
-    background: linear-gradient(135deg, #128c7e, #25d366);
-    padding: 16px 18px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .wa-widget-header-info {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-
-  .wa-widget-avatar {
-    width: 40px; height: 40px;
-    border-radius: 50%;
-    background: rgba(255,255,255,0.2);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Orbitron', monospace;
-    font-size: 0.7rem;
-    font-weight: 700;
-    color: white;
-    letter-spacing: 1px;
-  }
-
-  .wa-widget-header-title {
-    font-family: 'Orbitron', monospace;
-    font-size: 0.85rem;
-    font-weight: 700;
-    color: white;
-    letter-spacing: 1px;
-  }
-
-  .wa-widget-header-status {
-    font-size: 0.72rem;
-    color: rgba(255,255,255,0.85);
-    display: flex;
-    align-items: center;
-    gap: 4px;
-  }
-
-  .wa-widget-close {
-    background: none;
-    border: none;
-    color: rgba(255,255,255,0.8);
-    font-size: 1.2rem;
-    cursor: pointer;
-    padding: 4px 8px;
-    border-radius: 4px;
-    transition: background 0.2s;
-  }
-  .wa-widget-close:hover { background: rgba(255,255,255,0.15); }
-
-  .wa-widget-body {
-    flex: 1;
-    padding: 16px;
-    overflow-y: auto;
-    background: rgba(10,15,30,0.6);
-    min-height: 200px;
-  }
-
-  .wa-message {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    margin-bottom: 12px;
-  }
-
-  .wa-message-content {
-    background: rgba(37,211,102,0.12);
-    border: 1px solid rgba(37,211,102,0.2);
-    border-radius: 4px 16px 16px 16px;
-    padding: 12px 16px;
-    font-size: 0.92rem;
-    color: var(--white);
-    line-height: 1.5;
-    max-width: 90%;
-  }
-
-  .wa-message-time {
-    font-size: 0.65rem;
-    color: var(--grey-dim);
-    margin-top: 4px;
-    padding-left: 4px;
-  }
-
-  .wa-widget-footer {
-    display: flex;
-    padding: 10px 12px;
-    gap: 8px;
-    background: rgba(10,15,30,0.8);
-    border-top: 1px solid rgba(37,211,102,0.15);
-  }
-
-  .wa-widget-input {
-    flex: 1;
-    background: rgba(255,255,255,0.06);
-    border: 1px solid rgba(37,211,102,0.2);
-    border-radius: 8px;
-    padding: 10px 14px;
-    color: var(--white);
-    font-family: 'Rajdhani', sans-serif;
-    font-size: 0.92rem;
-    outline: none;
-    transition: border-color 0.2s;
-  }
-  .wa-widget-input:focus { border-color: #25d366; }
-
-  .wa-widget-send {
-    width: 42px; height: 42px;
-    border-radius: 50%;
-    border: none;
-    background: linear-gradient(135deg, #25d366, #128c7e);
-    color: white;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: all 0.2s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-  }
-  .wa-widget-send:hover { transform: scale(1.1); box-shadow: 0 0 20px rgba(37,211,102,0.4); }
-
-  .wa-widget-btn {
     width: 58px; height: 58px;
-    border-radius: 50%;
-    border: none;
     background: linear-gradient(135deg, #25d366, #128c7e);
-    cursor: pointer;
+    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 1.6rem;
-    box-shadow: 0 4px 24px rgba(37,211,102,0.4);
+    box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+    text-decoration: none;
     transition: all 0.3s;
-    position: relative;
-    flex-shrink: 0;
     animation: waFloat 3s ease-in-out infinite;
   }
-  .wa-widget-btn:hover {
-    transform: scale(1.08);
-    box-shadow: 0 6px 30px rgba(37,211,102,0.6);
-    animation: none;
-  }
 
-  .wa-widget-btn-icon,
-  .wa-widget-btn-close {
-    transition: opacity 0.2s, transform 0.2s;
-    position: absolute;
+  .wa-float:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 30px rgba(37,211,102,0.6);
   }
-  .wa-widget-btn.open .wa-widget-btn-icon { opacity: 0; transform: rotate(-90deg); }
-  .wa-widget-btn.open .wa-widget-btn-close { opacity: 1; transform: rotate(0); }
-  .wa-widget-btn-icon { opacity: 1; }
-  .wa-widget-btn-close { opacity: 0; transform: rotate(90deg); }
 
   @keyframes waFloat {
     0%,100% { transform: translateY(0); }
     50% { transform: translateY(-5px); }
+  }
+
+  @media (max-width: 480px) {
+    .toast { font-size: 0.85rem; padding: 12px 20px; }
   }
 
   /* ── DIVIDER ── */
@@ -992,11 +827,6 @@
     .form-box { padding: 32px 24px; }
     .stats-inner { grid-template-columns: 1fr; gap: 16px; }
     .hero-logo-wrap img { width: 120px; height: 120px; }
-  }
-
-  @media (max-width: 480px) {
-    .wa-widget-panel { width: calc(100vw - 40px); max-height: 420px; right: 20px; }
-    .toast { font-size: 0.85rem; padding: 12px 20px; }
   }
 </style>
 </head>
@@ -1234,38 +1064,8 @@
   <p class="footer-copy">© 2026 DLVtech · Automatización & Inteligencia Artificial · Todos los derechos reservados.</p>
 </footer>
 
-<!-- WhatsApp Widget -->
-<div class="wa-widget" id="waWidget">
-  <div class="wa-widget-panel" id="waPanel">
-    <div class="wa-widget-header">
-      <div class="wa-widget-header-info">
-        <div class="wa-widget-avatar">DLV</div>
-        <div>
-          <div class="wa-widget-header-title">DLVtech</div>
-          <div class="wa-widget-header-status">🟢 En línea</div>
-        </div>
-      </div>
-      <button class="wa-widget-close" id="waClose" aria-label="Cerrar chat">✕</button>
-    </div>
-    <div class="wa-widget-body" id="waBody">
-      <div class="wa-message">
-        <div class="wa-message-content">
-          ¡Hola! 👋 Soy el asistente de <strong>DLVtech</strong>. ¿En qué puedo ayudarte?<br><br>
-          Puedes preguntarme sobre nuestros servicios o escribir directamente tu mensaje y te responderé al instante.
-        </div>
-        <div class="wa-message-time">Ahora</div>
-      </div>
-    </div>
-    <div class="wa-widget-footer">
-      <input type="text" class="wa-widget-input" id="waInput" placeholder="Escribe un mensaje..." autocomplete="off">
-      <button class="wa-widget-send" id="waSend" aria-label="Enviar">➤</button>
-    </div>
-  </div>
-  <button class="wa-widget-btn" id="waToggle" aria-label="Abrir chat">
-    <span class="wa-widget-btn-icon">💬</span>
-    <span class="wa-widget-btn-close">✕</span>
-  </button>
-</div>
+<!-- WhatsApp floating button -->
+<a href="https://wa.me/34664700341?text=Hola,%20quiero%20m%C3%A1s%20info%20de%20DLVtech" target="_blank" class="wa-float" title="Chatear por WhatsApp">💬</a>
 
 <!-- Toast -->
 <div class="toast" id="toast"></div>
@@ -1380,44 +1180,6 @@
       document.getElementById('hero').scrollIntoView({ behavior: 'smooth' });
     }, 1200);
   }
-
-  // ── WHATSAPP WIDGET ──
-  const waToggle = document.getElementById('waToggle');
-  const waPanel = document.getElementById('waPanel');
-  const waClose = document.getElementById('waClose');
-  const waInput = document.getElementById('waInput');
-  const waSend = document.getElementById('waSend');
-
-  function toggleWidget(open) {
-    const isOpen = open !== undefined ? open : waPanel.classList.toggle('open');
-    if (open !== undefined) {
-      waPanel.classList.toggle('open', open);
-      waToggle.classList.toggle('open', open);
-    } else {
-      waPanel.classList.toggle('open');
-      waToggle.classList.toggle('open');
-    }
-    if (waPanel.classList.contains('open')) {
-      waInput.focus();
-    }
-  }
-
-  waToggle.addEventListener('click', () => toggleWidget());
-  waClose.addEventListener('click', () => toggleWidget(false));
-
-  function sendWaMessage() {
-    const text = waInput.value.trim();
-    if (!text) return;
-    const encoded = encodeURIComponent(text);
-    window.open(`https://wa.me/34664700341?text=${encoded}`, '_blank');
-    waInput.value = '';
-    toggleWidget(false);
-  }
-
-  waSend.addEventListener('click', sendWaMessage);
-  waInput.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') sendWaMessage();
-  });
 </script>
 </body>
 </html>
