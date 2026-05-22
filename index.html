@@ -1145,11 +1145,11 @@
     try {
       await emailjs.send('default_service', 'template_fkze7ou', {
         to_email: 'dlvtech.ia@gmail.com',
-        from_name: nombre,
-        negocio: negocio,
-        whatsapp: whatsapp,
-        sector: sector,
-        message: `Nueva solicitud de prueba gratuita\n\nNombre: ${nombre}\nNegocio: ${negocio}\nWhatsApp: ${whatsapp}\nSector: ${sector}\nFecha: ${payload.fecha}`
+        user_nombre: nombre,
+        user_negocio: negocio,
+        user_whatsapp: whatsapp,
+        user_sector: sector,
+        user_message: `Nueva solicitud de prueba gratuita\n\nNombre: ${nombre}\nNegocio: ${negocio}\nWhatsApp: ${whatsapp}\nSector: ${sector}\nFecha: ${payload.fecha}`
       });
     } catch (e) {
       console.warn('EmailJS error (non-blocking):', e);
